@@ -14,4 +14,7 @@ JSON variables are loaded?
 JSON string variables are loaded?
 {{ isset($nameString) ? 'yes: name = '.$nameString : 'no' }}
 
+Extensions are loaded?
+@no("yes")
+
 @endsection

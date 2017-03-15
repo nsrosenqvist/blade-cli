@@ -57,6 +57,13 @@ class Compile extends Command
         );
 
         $this->addOption(
+            'extend',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'This option accepts a path to a PHP file with user code to extend the compiler by using $compiler->extend()'
+        );
+
+        $this->addOption(
             'dynamic-base',
             null,
             InputOption::VALUE_NONE,
@@ -70,6 +77,7 @@ class Compile extends Command
         $dataPaths = $input->getOption('data');
         $outputDir = $input->getOption('output-dir');
         $outputExt = $input->getOption('output-ext');
+        $extend = $input->getOption('extend');
         $baseDirs = $input->getOption('base-dir');
         $dynamicBase = $input->getOption('dynamic-base');
 
@@ -124,6 +132,10 @@ class Compile extends Command
         $cacheDir = sys_get_temp_dir().'/blade/views';
         $blade = new Compiler($cacheDir, $baseDirs);
 
+        if (file_exists($extend)) {
+            includeExtensions($blade, $extend);
+        }
+
         // Loop through all templates
         foreach ($templates as $template) {
             // Compile template
@@ -140,7 +152,11 @@ class Compile extends Command
                 $dynamicBase = ($dynamicBase == '.') ? getcwd() : $dynamicBase;
 
                 $dynamicDirs = array_merge($baseDirs, [$dynamicBase]);
-                $blade = new Compiler($cacheDir, $dynamicDirs);
+                $bladeDyn = new Compiler($cacheDir, $dynamicDirs);
+
+                if (file_exists($extend)) {
+                    includeExtensions($bladeDyn, $extend);
+                }
 
                 $compiled = $blade->render($reference, $data);
             }
@@ -266,4 +282,8 @@ class Compile extends Command
             throw new ErrorException("Failed to write output to file: ".$path);
         }
     }
+}
+
+function includeExtensions(&$compiler, $path) {
+    include $path;
 }

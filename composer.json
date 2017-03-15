@@ -23,8 +23,8 @@
     },
     "scripts": {
         "build": "mkdir -p dist && php ./phar-composer.phar build . dist",
-        "test": "php bin/blade test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}'",
-        "build:test": "php dist/blade-cli.phar test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}'",
+        "test": "php bin/blade test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}' --extend=test/extensions.php",
+        "build:test": "php dist/blade-cli.phar test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}' --extend=test/extensions.php",
         "build:install": "sudo cp dist/blade-cli.phar /usr/bin/blade && sudo chmod +x /usr/bin/blade"
     },
     "bin": ["bin/blade"]

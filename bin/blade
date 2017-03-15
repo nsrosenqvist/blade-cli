@@ -11,7 +11,7 @@ use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 // Create App
-$application = new Application('Blade CLI', '1.0.1');
+$application = new Application('Blade CLI', '1.1.0');
 $dispatcher = new EventDispatcher();
 
 //Add compile command

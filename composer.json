@@ -1,0 +1,29 @@
+{
+    "name": "nsrosenqvist/blade-cli",
+    "description": "Command line version of Laravel's Blade templating engine",
+    "keywords": ["template compiler", "laravel blade", "terminal", "cli"],
+    "license": "MIT",
+    "homepage": "https://github.com/nsrosenqvist/blade-cli",
+    "authors": [
+        {
+            "name": "Niklas Rosenqvist",
+            "email": "niklas.s.rosenqvist@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "NSRosenqvist\\Blade\\Console\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "symfony/console": "^3.2",
+        "nsrosenqvist/blade-compiler": "^1.0.0"
+    },
+    "scripts": {
+        "build": "mkdir -p dist && php ./phar-composer.phar build . dist",
+        "test": "php bin/blade test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}'",
+        "test:build": "php dist/blade-cli.phar test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}'"
+    },
+    "bin": ["bin/blade"]
+}

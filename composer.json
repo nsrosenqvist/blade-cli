@@ -18,12 +18,14 @@
     "require": {
         "php": "^7.0",
         "symfony/console": "^3.2",
-        "nsrosenqvist/blade-compiler": "^1.0.0"
+        "nsrosenqvist/blade-compiler": "^1.0.0",
+        "symfony/event-dispatcher": "^3.2"
     },
     "scripts": {
         "build": "mkdir -p dist && php ./phar-composer.phar build . dist",
         "test": "php bin/blade test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}'",
-        "test:build": "php dist/blade-cli.phar test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}'"
+        "build:test": "php dist/blade-cli.phar test/index.blade.php --data=test/variables.json --data=test/variables.php --data='{\"nameString\":\"John Doe\"}'",
+        "build:install": "sudo cp dist/blade-cli.phar /usr/bin/blade && sudo chmod +x /usr/bin/blade"
     },
     "bin": ["bin/blade"]
 }

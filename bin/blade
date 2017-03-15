@@ -5,16 +5,42 @@ require __DIR__.'/../vendor/autoload.php';
 
 use NSRosenqvist\Blade\Console\Command;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\HelpCommand;
+use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 // Create App
-$application = new Application('Blade', '1.0.0');
+$application = new Application('Blade CLI', '1.0.1');
+$dispatcher = new EventDispatcher();
 
 //Add compile command
 $compile = new Command\Compile();
 $application->add($compile);
 
+// Run help if no arguments are set
+$dispatcher->addListener(ConsoleEvents::COMMAND, function (ConsoleCommandEvent $event) use ($compile) {
+    $input = $event->getInput();
+    $output = $event->getOutput();
+    $command = $event->getCommand();
+
+    if ($command->getName() == 'compile') {
+        $template = $input->getArgument('template');
+
+        // Show help message if no arguments are set
+        if (empty($template)) {
+            $help = new HelpCommand();
+            $help->setCommand($compile);
+            $help->run($input, $output);
+
+            $event->disableCommand();
+        }
+    }
+});
+
 // Single command application
 $application->setDefaultCommand($compile->getName(), true);
 
 // Run
+$application->setDispatcher($dispatcher);
 $application->run();

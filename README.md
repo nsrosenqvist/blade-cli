@@ -6,6 +6,8 @@ Blade CLI is a command line compiler for the Laravel Blade templating engine. Yo
 ## Installation
 To install you can either clone this repo and run `composer install && composer build` or simply retrieving the latest PHAR from the [releases page](https://www.github.com/nsrosenqvist/blade-cli/releases/latest).
 
+I also have a convenience feature configured that install the PHAR to `/usr/bin` by running `composer build:install` but it makes a whole lot of assumptions of your OS and probably only works on Linux and macOS. Use at your own risk.
+
 ## Usage
 `compile [options] [--] <template> (<template>)...`
 

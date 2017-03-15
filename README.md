@@ -9,7 +9,7 @@ To install you can either clone this repo and run `composer install && composer 
 I also have a convenience feature configured that install the PHAR to `/usr/bin` by running `composer build:install` but it makes a whole lot of assumptions of your OS and probably only works on Linux and macOS. Use at your own risk.
 
 ## Usage
-`compile [options] [--] <template> (<template>)...`
+`php blade-cli.phar [options] [--] <template> (<template>)...`
 
 ### Arguments
 Argument     | Details                                      

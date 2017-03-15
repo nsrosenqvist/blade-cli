@@ -23,6 +23,7 @@ Option        | Details
 `--output-dir=OUTPUT-DIR` | Output path relative from current working directory or absolute
 `--base-dir=BASE-DIR` | Base directory to look for template files from. If not set, template's containing dir is assumed (multiple values allowed)
 `--output-ext=OUTPUT-EXT` | When an output dir is specified you can also set what file extension the compiled template should be created with [default: "txt"]
+`--extend=EXTEND` | This option accepts a path to a PHP file with user code to extend the compiler by using $compiler->extend()
 `--dynamic-base` | Automatically add the parent directories of all templates as base directories. This requires a new Blade compiler instance for each template file which adds overhead but simplifies processing multiple templates at once and have each be a self-contained template hierarchy tree. This is not compatible with templates supplied as native Blade references
 `-h, --help` | Display this help message
 `-q, --quiet` | Do not output any message
